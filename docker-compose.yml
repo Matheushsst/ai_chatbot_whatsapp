@@ -1,0 +1,22 @@
+services:
+
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: consultai_waha
+    restart: always
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - '3000:3000'
+
+  api:
+    build:
+      context: .
+      dockerfile:  Dockerfile.api
+    container_name: consultai_api
+    ports:
+      - '5000:5000'
+    volumes:
+    - .:/app
+    - ./chroma_data:/app/chroma_data
